@@ -1,0 +1,19 @@
+{
+  "name": "hazelcast-cluster-launcher",
+  "description": "service launcher utility",
+  "scripts": {
+    "everything": "concurrently --names \"HAZEL1,HAZEL2\" -c cyan,yellow npm:hazelcast-node-1 npm:hazelcast-node-2",
+    "hazelcast-node-1": "java -Dserver.port=9090 -jar hazelcast-node/build/libs/hazelcast-node.jar",
+    "hazelcast-node-2": "java -Dserver.port=9091 -jar hazelcast-node/build/libs/hazelcast-node.jar"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jandadav/hazelcast-cluster.git"
+  },
+  "author": "David Janda",
+  "license": "GPL-2.0",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
+}

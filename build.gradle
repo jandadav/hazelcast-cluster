@@ -1,2 +1,7 @@
 group 'com.jandadav'
 version '1.0-SNAPSHOT'
+
+task runIntegrationTest {
+    group = 'verification'
+    description = 'Run services and execute integration tests. Start the services with "npm run everuthing" first!'
+}

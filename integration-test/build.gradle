@@ -20,3 +20,7 @@ test {
         events "passed", "skipped", "failed"
     }
 }
+
+jar {
+    archiveFileName = "integration-test.jar"
+}
