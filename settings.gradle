@@ -1,4 +1,5 @@
 rootProject.name = 'hazelcast-cluster'
 include 'hazelcast-node'
 include 'integration-test'
+include 'eureka-discovery'
 

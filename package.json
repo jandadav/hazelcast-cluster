@@ -2,9 +2,10 @@
   "name": "hazelcast-cluster-launcher",
   "description": "service launcher utility",
   "scripts": {
-    "everything": "concurrently --names \"HAZEL1,HAZEL2\" -c cyan,yellow npm:hazelcast-node-1 npm:hazelcast-node-2",
+    "everything": "concurrently --names \"HAZEL1,HAZEL2,EUREKA\" -c cyan,yellow,red npm:hazelcast-node-1 npm:hazelcast-node-2 npm:eureka",
     "hazelcast-node-1": "java -Dserver.port=9090 -jar hazelcast-node/build/libs/hazelcast-node.jar",
-    "hazelcast-node-2": "java -Dserver.port=9091 -jar hazelcast-node/build/libs/hazelcast-node.jar"
+    "hazelcast-node-2": "java -Dserver.port=9091 -jar hazelcast-node/build/libs/hazelcast-node.jar",
+    "eureka": "java -jar eureka-discovery/build/libs/eureka-discovery.jar"
   },
   "repository": {
     "type": "git",
