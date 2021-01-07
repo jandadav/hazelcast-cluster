@@ -1,2 +1,9 @@
 hazelcast:
   cluster-name: hazelcast-cluster
+
+  network:
+    join:
+      multicast:
+        enabled: false
+      tcp-ip:
+        enabled: true
