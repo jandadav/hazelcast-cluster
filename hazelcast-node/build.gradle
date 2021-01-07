@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.4.1'
+    id 'org.springframework.boot' version '2.3.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
 }
@@ -10,12 +10,18 @@ sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+ext {
+    set('springCloudVersion', "Hoxton.SR1")
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.hazelcast:hazelcast-all:4.1.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.5.RELEASE'
 
     implementation 'org.projectlombok:lombok:1.18.16'
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
