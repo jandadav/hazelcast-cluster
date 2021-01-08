@@ -21,6 +21,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.hazelcast:hazelcast-all:4.1.1'
+    implementation 'com.hazelcast:hazelcast-eureka-one:2.0.1'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.5.RELEASE'
 
     implementation 'org.projectlombok:lombok:1.18.16'
