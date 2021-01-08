@@ -1,9 +1,15 @@
 ### Hazelcast IMDG cluster with Dynamic discovery and Persistence
 
+* Discovery service for hazelcast nodes to be discovered
+
+* Hazelcast multicast disabled, using Eureka instead
+
 
 ### Notes
 
-Tried to run IT processes with gradle, no joy.
+* Run integration tests manually from ide.. test task is disabled as it was running during build. 
+
+* Tried to run IT processes with gradle, no joy.
 Exec task and depending on it is synchronous, so no use.
 Starting NPM through gradle runs detached and needs a way to kill, plus no logs.
 So keeping starting services with `npm run everything` manual for the time being.
