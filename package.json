@@ -5,7 +5,10 @@
     "everything": "concurrently --names \"HAZEL1,HAZEL2,EUREKA\" -c cyan,yellow,red npm:hazelcast-node-1 npm:hazelcast-node-2 npm:eureka",
     "hazelcast-node-1": "java -Dserver.port=9090 -jar hazelcast-node/build/libs/hazelcast-node.jar",
     "hazelcast-node-2": "java -Dserver.port=9091 -jar hazelcast-node/build/libs/hazelcast-node.jar",
-    "eureka": "java -jar eureka-discovery/build/libs/eureka-discovery.jar"
+    "eureka": "java -jar eureka-discovery/build/libs/eureka-discovery.jar",
+    "loadtest": "npm run clean && npm run jmeter",
+    "clean": "rimraf reports",
+    "jmeter": "jmeter -Jjmeter.reportgenerator.overall_granularity=1000 -n -t loadtest/loadtest.jmx -l reports/result -e -o reports/test-results -j reports/result.log"
   },
   "repository": {
     "type": "git",
@@ -15,6 +18,7 @@
   "license": "GPL-2.0",
   "dependencies": {},
   "devDependencies": {
-    "concurrently": "^5.3.0"
+    "concurrently": "^5.3.0",
+    "rimraf": "^3.0.2"
   }
 }
