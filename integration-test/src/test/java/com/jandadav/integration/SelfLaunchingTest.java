@@ -4,6 +4,7 @@ import io.restassured.http.ContentType;
 import org.junit.jupiter.api.*;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
@@ -83,7 +84,7 @@ public class SelfLaunchingTest {
     @Order(5)
     void retrieveReplicatedDataFromHazel2() {
 
-        // This is very fast replication of 1 record after registration
+        // This is very fast replication of 1 record after startup and registration
         await().atMost(1, SECONDS).ignoreExceptions()
                 .until(
                         () -> given()
@@ -93,6 +94,28 @@ public class SelfLaunchingTest {
                                 .body(),
                                 responseBody -> responseBody.asString().contains("value1"))
                 ;
+    }
+
+    @Test
+    @Order(6)
+    void canReplicateInClusterFast() {
+        given().header("Content-Type", "application/x-www-form-urlencoded")
+                .formParam("key", "key2")
+                .formParam("value", "Cyndi Lauper")
+                .when()
+                .post("http://localhost:9090/put")
+                .then()
+                .statusCode(200);
+
+        await().atMost(Duration.ofSeconds(1));
+
+        given()
+                .formParam("key", "key2")
+                .when()
+                .get("http://localhost:9091/get")
+                .then()
+                .statusCode(200)
+                .body(containsStringIgnoringCase("Cyndi Lauper"));
     }
 
     @AfterAll
