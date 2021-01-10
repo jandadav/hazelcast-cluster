@@ -13,6 +13,7 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.7.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'io.rest-assured:rest-assured:4.3.3'
+    testImplementation 'org.awaitility:awaitility:4.0.3'
 }
 
 test {
