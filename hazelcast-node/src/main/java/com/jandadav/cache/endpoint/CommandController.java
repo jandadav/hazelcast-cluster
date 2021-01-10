@@ -19,6 +19,11 @@ public class CommandController {
         return hazelcastInstance.getMap("map");
     }
 
+    @GetMapping("/")
+    public String home() {
+        return "HAZELCAST-NODE";
+    }
+
     @PostMapping("/put")
     public String put(@RequestParam(value = "key") String key, @RequestParam(value = "value") String value) {
         retrieveMap().put(key, value);

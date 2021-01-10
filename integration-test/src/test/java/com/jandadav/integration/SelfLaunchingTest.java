@@ -10,7 +10,7 @@ import java.util.concurrent.Callable;
 import static io.restassured.RestAssured.given;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
-import static org.hamcrest.Matchers.containsStringIgnoringCase;
+import static org.hamcrest.Matchers.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SelfLaunchingTest {
@@ -35,6 +35,13 @@ public class SelfLaunchingTest {
     @Order(2)
     void hazelcast1Register() {
         await().atMost(60, SECONDS).until(hazelcast1IsRegistered());
+
+        //Tomcat starts last, the Hazelcast-Eureka integration waits for instance retrieval
+        await().atMost(60, SECONDS).ignoreExceptions()
+                .until(
+                        () -> given().get("http://localhost:9090/").statusCode(),
+                        equalTo(200)
+                );
     }
 
     @Test
@@ -64,6 +71,11 @@ public class SelfLaunchingTest {
     @Order(4)
     void startHazel2andWaitForRegistration() throws Exception{
         startHazel2();
+        await().atMost(60, SECONDS).ignoreExceptions()
+                .until(
+                () -> given().get("http://localhost:9091/").statusCode(),
+                equalTo(200)
+        );
 
     }
 
