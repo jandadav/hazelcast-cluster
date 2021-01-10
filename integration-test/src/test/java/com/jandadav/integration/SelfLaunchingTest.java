@@ -48,7 +48,7 @@ public class SelfLaunchingTest {
     @Order(3)
     void loadDataToHazel1() {
 
-        // TODO instance not ready here, Tomcat starts last but eureka registers with UP from the
+        // instance not ready here, Tomcat starts last but eureka registers with UP from the
         //  start.
 
         given().header("Content-Type", "application/x-www-form-urlencoded")
@@ -77,6 +77,22 @@ public class SelfLaunchingTest {
                 equalTo(200)
         );
 
+    }
+
+    @Test
+    @Order(5)
+    void retrieveReplicatedDataFromHazel2() {
+
+        // This is very fast replication of 1 record after registration
+        await().atMost(1, SECONDS).ignoreExceptions()
+                .until(
+                        () -> given()
+                                .formParam("key", "key1")
+                                .when()
+                                .get("http://localhost:9091/get")
+                                .body(),
+                                responseBody -> responseBody.asString().contains("value1"))
+                ;
     }
 
     @AfterAll
