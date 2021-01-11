@@ -1,6 +1,7 @@
 package com.jandadav.integration;
 
 import io.restassured.http.ContentType;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.*;
 
 import java.io.IOException;
@@ -45,6 +46,7 @@ public class SelfLaunchingTest {
                 );
     }
 
+    @Disabled
     @Test
     @Order(3)
     void loadDataToHazel1() {
@@ -68,6 +70,7 @@ public class SelfLaunchingTest {
             .body(containsStringIgnoringCase("value1"));
     }
 
+    @Disabled
     @Test
     @Order(4)
     void startHazel2andWaitForRegistration() throws Exception{
@@ -80,6 +83,7 @@ public class SelfLaunchingTest {
 
     }
 
+    @Disabled
     @Test
     @Order(5)
     void retrieveReplicatedDataFromHazel2() {
@@ -96,6 +100,7 @@ public class SelfLaunchingTest {
                 ;
     }
 
+    @Disabled
     @Test
     @Order(6)
     void canReplicateInClusterFast() {
@@ -116,6 +121,32 @@ public class SelfLaunchingTest {
                 .then()
                 .statusCode(200)
                 .body(containsStringIgnoringCase("Cyndi Lauper"));
+    }
+
+    @Test
+    @Order(7)
+    void loadLotsOfData() {
+
+        // TODO profile hazelcast vm
+        // this loads 16k records before it fails
+        //        Loaded: 16000 records
+        //        Led 11, 2021 12:01:28 DOP. org.apache.http.impl.client.DefaultHttpClient tryConnect
+        //        INFO: I/O exception (java.net.BindException) caught when connecting to {}->http://localhost:9090: Address already in use: connect
+        //        Led 11, 2021 12:01:28 DOP. org.apache.http.impl.client.DefaultHttpClient tryConnect
+
+        for(int i = 0; i < 100_000; i++) {
+            given().header("Content-Type", "application/x-www-form-urlencoded")
+                    .formParam("key", RandomStringUtils.random(30))
+                    .formParam("value", RandomStringUtils.random(5000))
+                    .when()
+                    .post("http://localhost:9090/put")
+                    .then()
+                    .statusCode(200);
+            if (i % 1000 == 0) {
+                System.out.println("Loaded: " + i + " records");
+            }
+        }
+
     }
 
     @AfterAll
