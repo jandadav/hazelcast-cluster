@@ -46,7 +46,6 @@ public class SelfLaunchingTest {
                 );
     }
 
-    @Disabled
     @Test
     @Order(3)
     void loadDataToHazel1() {
@@ -70,7 +69,6 @@ public class SelfLaunchingTest {
             .body(containsStringIgnoringCase("value1"));
     }
 
-    @Disabled
     @Test
     @Order(4)
     void startHazel2andWaitForRegistration() throws Exception{
@@ -83,7 +81,6 @@ public class SelfLaunchingTest {
 
     }
 
-    @Disabled
     @Test
     @Order(5)
     void retrieveReplicatedDataFromHazel2() {
@@ -100,7 +97,6 @@ public class SelfLaunchingTest {
                 ;
     }
 
-    @Disabled
     @Test
     @Order(6)
     void canReplicateInClusterFast() {
@@ -123,6 +119,7 @@ public class SelfLaunchingTest {
                 .body(containsStringIgnoringCase("Cyndi Lauper"));
     }
 
+    @Disabled
     @Test
     @Order(7)
     void loadLotsOfData() {

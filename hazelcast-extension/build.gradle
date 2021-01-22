@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group 'com.jandadav'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.hazelcast:hazelcast-all:4.1.1'
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+
+    implementation 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+}
+
+jar {
+    archiveFileName = "hazelcast-extension.jar"
+}
