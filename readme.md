@@ -22,9 +22,11 @@ Data not persisted, opensource does not provide mechanisms for persistent data.
 
 Handlers can be made and hooked on internal evenr model, that can serialize the data on events (inserted, deleted, .....) and custom serialization logic can be implemented.
 
-#### Discovery
+#### Discovery of clients
 
 Hazelcast provides native integration with Eureka discovery. The integration works very well and is easy to configure.
+
+Normally, Hazelcast uses multicast for discovery, which might be problematic for customers in production environment. Luckilly the discovery plugin can circumvent this problem. Other discovery plugins are provided for other discovery solutions as well.
 
 #### Native Client
 
